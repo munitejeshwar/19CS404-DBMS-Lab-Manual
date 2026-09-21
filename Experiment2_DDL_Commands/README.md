@@ -1,85 +1,36 @@
 # Experiment 2: DDL Commands
-```
-### 4. PRIMARY KEY
-Used to uniquely identify each record in a table.
-Properties:
-Must contain unique values.
-Cannot be null.
-Should contain minimal fields.
-Syntax:
+
+## AIM
+To study and implement DDL commands and different types of constraints.
+
+## THEORY
+
+### 1. CREATE
+Used to create a new relation (table).
+
+**Syntax:**
 ```sql
-CREATE TABLE Table_Name (
-  column_name data_type(size) PRIMARY KEY
+CREATE TABLE (
+  field_1 data_type(size),
+  field_2 data_type(size),
+  ...
 );
 ```
-### 5. FOREIGN KEY
-Used to reference the primary key of another table.
-Syntax:
+### 2. ALTER
+Used to add, modify, drop, or rename fields in an existing relation.
+(a) ADD
 ```sql
-CREATE TABLE Table_Name (
-  column_name data_type(size),
-  FOREIGN KEY (column_name) REFERENCES other_table(column)
-);
+ALTER TABLE std ADD (Address CHAR(10));
 ```
-### 6. DEFAULT
-Used to insert a default value into a column if no value is specified.
-
-Syntax:
+(b) MODIFY
 ```sql
-CREATE TABLE Table_Name (
-  col_name1 data_type,
-  col_name2 data_type,
-  col_name3 data_type DEFAULT 'default_value'
-);
+ALTER TABLE relation_name MODIFY (field_1 new_data_type(size));
 ```
-
-**Question 1**
---
-Insert the below data into the Student_details table, allowing the Subject and MARKS columns to take their default values.
-
-RollNo      Name          Gender      
-----------  ------------  ----------  
-204         Samuel Black  M          
-
-Note: The Subject and MARKS columns will use their default values.
-
+(c) DROP
 ```sql
-INSERT INTO Student_details (RollNo, Name, Gender)
-VALUES (204, 'Samuel Black', 'M');
-
-SELECT RollNo, Name, Gender 
-FROM Student_details 
-WHERE RollNo = 204;
-
+ALTER TABLE relation_name DROP COLUMN field_name;
 ```
-
-**Output:**
-
-<img width="1196" height="250" alt="image" src="https://github.com/user-attachments/assets/9b7bebbe-2b61-4b18-9171-8a04aa904726" />
-
-
-**Question 2**
----
-Insert all customers from Old_customers into Customers
-
-Table attributes are CustomerID, Name, Address, Email
-
+(d) RENAME
 ```sql
-
-INSERT INTO Customers (CustomerID, Name, Address, Email)
-SELECT CustomerID, Name, Address, Email
-FROM Old_customers;
-
+ALTER TABLE relation_name RENAME COLUMN old_field_name TO new_field_name;
 ```
-
-**Output:**
-
-<img width="1196" height="250" alt="image" src="https://github.com/user-attachments/assets/5aac1182-a974-4b3a-a13b-3fb0d7f29f81" />
-
-
-**Question 3**
----
-Insert the following students into the Student_details table:
-RollNo      Name        Gender      Subject     MARKS
-----------  ----------  ----------  ----------  ----------
-202            Ella King         F           Chemistry   87
